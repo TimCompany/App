@@ -1,0 +1,354 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    $(function () {
+        $("#WenJuanForm").validate({
+            rules: {
+                BanShiChu: {
+                    required: true
+                }
+            },
+            messages: {
+                BanShiChu: {
+                    required: "请选择所属办事处"
+                }
+            }
+        });
+
+        $("#YingXiang_A").click(function () {
+            $("#YingXiang_Other").val("");
+        });
+
+        $("#YingXiang_B").click(function () {
+            $("#YingXiang_Other").val("");
+        });
+
+        $("#YingXiang_C").click(function () {
+            $("#YingXiang_Other").val("");
+        });
+
+        $("#YingXiang_D").click(function () {
+            $("#YingXiang_Other").val("");
+        });
+
+        $("#YiShiGuanNian_A").click(function () {
+            $("#YiShiGuanNian_Other").val("");
+        });
+
+        $("#YiShiGuanNian_B").click(function () {
+            $("#YiShiGuanNian_Other").val("");
+        });
+
+        $("#YiShiGuanNian_C").click(function () {
+            $("#YiShiGuanNian_Other").val("");
+        });
+
+        $("#TiSheng_A").click(function () {
+            $("#TiSheng_Other").val("");
+        });
+
+        $("#TiSheng_B").click(function () {
+            $("#TiSheng_Other").val("");
+        });
+
+        $("#TiSheng_C").click(function () {
+            $("#TiSheng_Other").val("");
+        });
+
+        $("#TiSheng_D").click(function () {
+            $("#TiSheng_Other").val("");
+        });
+
+        $("#JieYue_A").click(function () {
+            $("#JieYue_Other").val("");
+        });
+
+        $("#JieYue_B").click(function () {
+            $("#JieYue_Other").val("");
+        });
+
+        $("#JieYue_C").click(function () {
+            $("#JieYue_Other").val("");
+        });
+
+        $("#JieYue_D").click(function () {
+            $("#JieYue_Other").val("");
+        });
+    });
+</script>
+
+<form action="" method="post" name="WenJuanForm" id="WenJuanForm" style="border:groove;padding:70px;width:100%">
+    <div>
+        <h4>
+            各位同事：<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您好！感谢您在百忙之中填写问卷！<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为适应公司发展需要，公司今年将开始推行精细化管理。为了清楚地了解目前公司精细化管理现状及存在的问题，从而制定进一步完善精细化管理的措施，公司拟定《精细化管理现状调查问卷》。请您根据自己的实际感受和看法如实填写。本问卷采用匿名形式。<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;敬祝身体健康，万事如意！<br />
+        </h4>
+    </div>
+    <hr />
+
+    <span>您所在办事处：</span>
+    <select name="BanShiChu">
+        <option></option>
+        <option value="佛山区域">佛山区域</option>
+        <option value="北滘">北滘</option>
+        <option value="容桂">容桂</option>
+        <option value="江门">江门</option>
+        <option value="新会">新会</option>
+        <option value="台山">台山</option>
+        <option value="三埠">三埠</option>
+        <option value="鹤山">鹤山</option>
+        <option value="中山">中山</option>
+        <option value="中山小榄">中山小榄</option>
+        <option value="中山黄圃">中山黄圃</option>
+        <option value="高明">高明</option>
+        <option value="九江">九江</option>
+        <option value="肇庆三榕">肇庆三榕</option>
+        <option value="肇庆高要">肇庆高要</option>
+        <option value="肇庆四会">肇庆四会</option>
+        <option value="肇庆新港">肇庆新港</option>
+        <option value="云浮">云浮</option>
+        <option value="梧州">梧州</option>
+        <option value="三水">三水</option>
+        <option value="莲花山">莲花山</option>
+        <option value="南沙">南沙</option>
+        <option value="花都">花都</option>
+        <option value="清远">清远</option>
+        <option value="斗门">斗门</option>
+        <option value="西域">西域</option>
+        <option value="广州散货部">广州散货部</option>
+        <option value="广州业务部">广州业务部</option>
+        <option value="广州空运部">广州空运部</option>
+        <option value="广州财务部">广州财务部</option>
+        <option value="经营管理部">经营管理部</option>
+        <option value="行政部">行政部</option>
+        <option value="人力资源部">人力资源部</option>
+        <option value="总经理室">总经理室</option>
+    </select><label style="color:red">@ViewBag.Message</label>
+    <hr/>
+
+    <h4>一、单项选择题</h4>
+    <hr/>
+
+    <span>1、	您认为您所属办事处进行精细化管理，会给您带来什么影响？</span><br /><br />
+    <input type="radio" name="YingXiang" id="YingXiang_A" value="A 增加了工作量">A 增加了工作量&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="YingXiang" id="YingXiang_B" value="B 减轻了工作量">B 减轻了工作量&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="YingXiang" id="YingXiang_C" value="C 没有任何帮助">C 没有任何帮助&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="YingXiang" id="YingXiang_D" value="D 说不清楚">D 说不清楚&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="radio" name="YingXiang" id="YingXiang_E" value="E 其他">E 其他&nbsp;&nbsp;&nbsp;&nbsp;<br />
+    <textarea name="YingXiang_Other" id="YingXiang_Other" placeholder="请填写其他内容" rows="10" style="width:800px"></textarea>
+    <hr />
+    
+
+    <span>2、	您认为哪些手段可以进一步促进中层管理者、基层员工进一步树立精细化管理观念和意识？</span><br /><br />
+    <input type="radio" name="YiShiGuanNian" id="YiShiGuanNian_A" value="A 选择一些好的辅导材料，自主学习">A 选择一些好的辅导材料，自主学习&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="YiShiGuanNian" id="YiShiGuanNian_B" value="B 所属办事处负责人组织基层员工一起学习">B 所属办事处负责人组织基层员工一起学习&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="YiShiGuanNian" id="YiShiGuanNian_C" value="C 公司组织大型培训">C 公司组织大型培训&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="radio" name="YiShiGuanNian" id="YiShiGuanNian_D" value="D 其他">D 其他&nbsp;&nbsp;&nbsp;&nbsp;<br />
+    <textarea name="YiShiGuanNian_Other" id="YiShiGuanNian_Other" placeholder="请填写其他内容" rows="10" style="width:800px"></textarea>
+    <hr/>
+    
+    <span>3、	您认为公司实施精细化管理的重点是？</span><br /><br />
+    <input type="radio" name="ZhongDian" value="A 市场营销">A 市场营销&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="ZhongDian" value="B 财务成本">B 财务成本&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="ZhongDian" value="C 信息技术">C 信息技术&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="ZhongDian" value="D 人力资源">D 人力资源&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="ZhongDian" value="E 企业文化">E 企业文化&nbsp;&nbsp;&nbsp;&nbsp;
+    <hr/>
+
+    <span>4、	您认为您所属办事处是否建立岗位的工作流程？</span><br /><br />
+    <input type="radio" name="LiuCheng" value="A 是的，有详细的操作流程">A 是的，有详细的操作流程&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="LiuCheng" value="B 是的，有操作流程但不完整">B 是的，有操作流程但不完整&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="LiuCheng" value="C 没有，都是靠传帮带">C 没有，都是靠传帮带&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="LiuCheng" value="D 没有，很难制定工作流程">D 没有，很难制定工作流程&nbsp;&nbsp;&nbsp;&nbsp;
+    <hr/>
+
+    <span>5、	您能够及时了解到本公司及办事处的相关工作信息吗？</span><br /><br />
+    <input type="radio" name="XinXi" value="A 经常能">A 经常能&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="XinXi" value="B 偶尔能">B 偶尔能&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="XinXi" value="C 经常不能">C 经常不能&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="XinXi" value="D 基本不能">D 基本不能&nbsp;&nbsp;&nbsp;&nbsp;
+    <hr />
+
+    <span>6、	您以为您所属单位人员的工作量饱和吗？</span><br /><br />
+    <input type="radio" name="BaoHe" value="A 较饱和">A 较饱和&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="BaoHe" value="B 不饱和 ">B 不饱和 &nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="BaoHe" value="C 忙闲不均">C 忙闲不均&nbsp;&nbsp;&nbsp;&nbsp;
+    <hr/>
+
+    <span>7、	您认为您所属单位是否已经制定了清晰的人员培养和发展措施？其执行效果如何？</span><br /><br />
+    <input type="radio" name="PeiYang" value="A 已经制定，执行效果很好 ">A 已经制定，执行效果很好 &nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="PeiYang" value="B 已经制定，但是没见到执行效果 ">B 已经制定，但是没见到执行效果 &nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="radio" name="PeiYang" value="C 已经制定，但是看起来不可行">C 已经制定，但是看起来不可行&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="PeiYang" value="D 没有制定 ">D 没有制定 &nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="PeiYang" value="E 不太了解">E 不太了解&nbsp;&nbsp;&nbsp;&nbsp;
+    <hr/>
+    
+    <span>8、	您认为通过以下哪个方法提升部门收入最有效？</span><br /><br />
+    <input type="radio" name="TiSheng" id="TiSheng_A" value="A 增加营销量">A 增加营销量&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="TiSheng" id="TiSheng_B" value="B 挖掘老客户潜力">B 挖掘老客户潜力&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="TiSheng" id="TiSheng_C" value="C 老客户介绍">C 老客户介绍&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="TiSheng" id="TiSheng_D" value="D 挖掘同行客户">D 挖掘同行客户&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="radio" name="TiSheng" id="TiSheng_E" value="E 其他">E 其他&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <textarea name="TiSheng_Other" id="TiSheng_Other" placeholder="请填写其他内容" rows="10" style="width:800px"></textarea>
+    <hr/>
+
+    <span>9、	您认为您所属单位岗位设置存在的主要问题表现在哪里？</span><br /><br />
+    <input type="radio" name="GangWeiWenTi" value="A 因人设置现象严重">A 因人设置现象严重&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="GangWeiWenTi" value="B 岗位职责划分不合理">B 岗位职责划分不合理&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="GangWeiWenTi" value="C 上岗条件不明确">C 上岗条件不明确&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="GangWeiWenTi" value="D 岗位职责与绩效工资不匹配">D 岗位职责与绩效工资不匹配&nbsp;&nbsp;&nbsp;&nbsp;
+    <hr />
+
+    <span>10、	您认为您所属办事处实施新绩效奖金分配方案如何？</span><br /><br />
+    <input type="radio" name="FenPeiFnagAn" value="A 调动了大部分人的积极性">A 调动了大部分人的积极性&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="FenPeiFnagAn" value="B 调动了少部分人的积极性">B 调动了少部分人的积极性&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="FenPeiFnagAn" value="C 根本没有调动人的积极性">C 根本没有调动人的积极性&nbsp;&nbsp;&nbsp;&nbsp;
+    <hr />
+
+    <span>11、	您认为您所属单位哪些方面可节约成本而不影响生产经营？</span><br /><br />
+    <input type="radio" name="JieYue" id="JieYue_A" value="A 办公室水电费">A 办公室水电费&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="JieYue" id="JieYue_B" value="B 办公室、宿舍租金">B 办公室、宿舍租金&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="JieYue" id="JieYue_C" value="C 办公用品费">C 办公用品费&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="JieYue" id="JieYue_D" value="D 办公饮用水">D 办公饮用水&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="radio" name="JieYue" id="JieYue_E" value="E 其他">E 其他&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <textarea name="JieYue_Other" id="JieYue_Other" placeholder="请填写其他内容" rows="10" style="width:800px"></textarea>
+    <hr/>
+
+    <h4>二、不定项选择题（可单项选择或多项选择）</h4>
+    <hr/>
+
+    <span>1、	您认为所属单位对精细化管理的需求最迫切是？</span><br /><br />
+    <input type="checkbox" name="XuQiu" value="A 营销">A 营销&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="XuQiu" value="B 客服">B 客服&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="XuQiu" value="C 操作">C 操作&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="XuQiu" value="D 箱管">D 箱管&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="XuQiu" value="E 财务">E 财务&nbsp;&nbsp;&nbsp;&nbsp;
+    <hr/>
+
+    <span>2、	如果流程不畅通，可能的原因包括哪些？</span><br /><br />
+    <input type="checkbox" name="BuTongChang" value="A 办事处各部门之间职责不清">A 办事处各部门之间职责不清&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="BuTongChang" value="B 缺乏对流程运行的监督、检查">B 缺乏对流程运行的监督、检查&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="BuTongChang" value="C 公司的流程无书面化或无用信息化手段固化">C 公司的流程无书面化或无用信息化手段固化&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="checkbox" name="BuTongChang" value="D 部门分割严重，协调难度大">D 部门分割严重，协调难度大&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="BuTongChang" value="E 部门之间推卸责任，本位主义严重">E 部门之间推卸责任，本位主义严重&nbsp;&nbsp;&nbsp;&nbsp;
+    <hr/>
+
+    <span>3、	您觉得您所属单位对您的工作岗位职责设计清晰合理吗？</span><br /><br />
+    <input type="checkbox" name="GangWeiHeLi" value="A 分工不清晰，分公司业务量较小，员工通常身兼多个岗位">A 分工不清晰，分公司业务量较小，员工通常身兼多个岗位&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="checkbox" name="GangWeiHeLi" value="B 分工不清晰，分公司业务量大，人手不充足">B 分工不清晰，分公司业务量大，人手不充足&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="checkbox" name="GangWeiHeLi" value="C 分工不清晰，岗位职责不够严谨，不同岗位之间的责任没有划清，导致流程容易模糊">C 分工不清晰，岗位职责不够严谨，不同岗位之间的责任没有划清，导致流程容易模糊&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="checkbox" name="GangWeiHeLi" value="D 分工清晰，但导致人员编制较多">D 分工清晰，但导致人员编制较多&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="checkbox" name="GangWeiHeLi" value="E 分工清晰，人员编制合理">E 分工清晰，人员编制合理&nbsp;&nbsp;&nbsp;&nbsp;
+    <hr/>
+
+    <span>4、	您对新业务系统的岗位调整、流程优化有哪些建议？</span><br /><br />
+    <input type="checkbox" name="LiuChengJianYi" value="A 国内、香港都设定一个责任人负责每一条航线，由责任人监督和指导新系统工作">A 国内、香港都设定一个责任人负责每一条航线，由责任人监督和指导新系统工作&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="checkbox" name="LiuChengJianYi" value="B 新业务系统优化过程中，有新的功能或者新的变化出现，应由香港信息部及时通知所有业务部门">B 新业务系统优化过程中，有新的功能或者新的变化出现，应由香港信息部及时通知所有业务部门&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="checkbox" name="LiuChengJianYi" value="C 在新系统与飞龙两套系统并行过程中，将工作任务较重的内容分摊，并在绩效分配时做适当调整">C 在新系统与飞龙两套系统并行过程中，将工作任务较重的内容分摊,并在绩效分配时做适当调整&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="checkbox" name="LiuChengJianYi" value="D 定期做新系统经验交流，将遇到的问题和解决办法进行共享">D 定期做新系统经验交流，将遇到的问题和解决办法进行共享&nbsp;&nbsp;&nbsp;&nbsp;
+    <hr/>
+
+    <span>5、	您认为目前公司客服人员在哪方面表现特别不当？</span><br /><br />
+    <input type="checkbox" name="KeFuQueDian" value="A 不耐心">A 不耐心&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="KeFuQueDian" value="B 不热忱">B 不热忱&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="KeFuQueDian" value="C 不专心听取">C 不专心听取&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="KeFuQueDian" value="D 不友善">D 不友善&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="KeFuQueDian" value="E 反应迟钝">E 反应迟钝&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="KeFuQueDian" value="F 没有不当之处">F 没有不当之处&nbsp;&nbsp;&nbsp;&nbsp;
+    <hr/>
+
+    <span>6、	在以下箱管操作中，您认为所在办事处需在哪些方面加强精细化管理，以提高服务质量，减少失误和降低成本？</span><br /><br />
+    <input type="checkbox" name="JiangBen" value="A 船公司EDI">A 船公司EDI&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="JiangBen" value="B 货柜适装检验">B 货柜适装检验&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="JiangBen" value="C 货柜清洁和维修">C 货柜清洁和维修&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="JiangBen" value="D 船公司吉柜控制和使用">D 船公司吉柜控制和使用&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="JiangBen" value="E 珠江柜调控">E 珠江柜调控&nbsp;&nbsp;&nbsp;&nbsp;
+    <hr/>
+
+    <span>7、	对营销人员考核的精细化管理中，除毛利外，以下哪些方面您认为是必要的，或需加强的？</span><br /><br />
+    <input type="checkbox" name="JiaQiang" value="A 拜访客户次数或频率">A 拜访客户次数或频率&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="JiaQiang" value="B 对客户生活和工作等方面关怀的次数">B 对客户生活和工作等方面关怀的次数&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="JiaQiang" value="C 对目标客户持续跟踪和沟通的次数">C 对目标客户持续跟踪和沟通的次数&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="checkbox" name="JiaQiang" value="D 对客户跟踪情况的文字总结归档">D 对客户跟踪情况的文字总结归档&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="JiaQiang" value="E 新客户的数量">E 新客户的数量&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="JiaQiang" value="F 旧客户的新业务开拓">F 旧客户的新业务开拓&nbsp;&nbsp;&nbsp;&nbsp;
+    <hr/>
+
+    <span>8、	在您所属单位客服人员考核的精细化管理中，您认为以下哪些方面是必要的，或需加强的？</span><br /><br />
+    <input type="checkbox" name="KaoHe" value="A 为客户解决重大问题的次数并总结方案">A 为客户解决重大问题的次数并总结方案&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="KaoHe" value="B 文字归档总结客户出现的问题和解决方案">B 文字归档总结客户出现的问题和解决方案&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="KaoHe" value="C 回复客户邮件信息的速度">C 回复客户邮件信息的速度&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="checkbox" name="KaoHe" value="D 接听电话的速度">D 接听电话的速度&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="KaoHe" value="E 反馈客户信息给营销人员或负责人的频率">E 反馈客户信息给营销人员或负责人的频率&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="KaoHe" value="F 对新旧客户积极推销我司业务的频率和次数">F 对新旧客户积极推销我司业务的频率和次数&nbsp;&nbsp;&nbsp;&nbsp;
+    <hr/>
+
+    <span>9、	如果您觉得目前公司的人员培养不合理，您认为是哪方面不合理？</span><br /><br />
+    <input type="checkbox" name="PeiYangBuHeLi" value="A 选拔的培养对象不对">A 选拔的培养对象不对&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="PeiYangBuHeLi" value="B 没有进行培养对象选拔">B 没有进行培养对象选拔&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="PeiYangBuHeLi" value="C 高层领导没有足够重视">C 高层领导没有足够重视&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="PeiYangBuHeLi" value="D 缺乏培养对象的淘汰制度">D 缺乏培养对象的淘汰制度&nbsp;&nbsp;&nbsp;&nbsp;
+    <hr/>
+
+    <span>10、	您以为您所属办事处绩效考核中存在哪些重要问题需要改进？</span><br /><br />
+    <input type="checkbox" name="KaoHeGaiJin" value="A 考核指标设置不合理，部分考核指标过于模糊化，难以衡量">A 考核指标设置不合理，部分考核指标过于模糊化，难以衡量&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="checkbox" name="KaoHeGaiJin" value="B 几乎没有考核">B 几乎没有考核&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="checkbox" name="KaoHeGaiJin" value="C 考核只流于形式，员工考核的分数都差不多（或者部门内轮流坐庄），其目的就是为了分配绩效奖金">C 考核只流于形式，员工考核的分数都差不多（或者部门内轮流坐庄），其目的就是为了分配绩效奖金&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="checkbox" name="KaoHeGaiJin" value="D 考核结果没有与员工的绩效改进、升职加薪联系起来，为了考核而考核">D 考核结果没有与员工的绩效改进、升职加薪联系起来，为了考核而考核&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="checkbox" name="KaoHeGaiJin" value="E 办事处负责人给员工的绩效反馈和沟通不足，使员工无法确定需要在哪些方面进行改进">E 办事处负责人给员工的绩效反馈和沟通不足，使员工无法确定需要在哪些方面进行改进&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="checkbox" name="KaoHeGaiJin" value="F 办事处负责人缺乏有效的绩效反馈和指导技能，不能有效地提供如何改进的信息">F 办事处负责人缺乏有效的绩效反馈和指导技能，不能有效地提供如何改进的信息&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="checkbox" name="KaoHeGaiJin" value="G 办事处负责人不能持续跟踪员工的业绩改进状况并给出指导性的意见，使员工无法确定是否达到了要求">G 办事处负责人不能持续跟踪员工的业绩改进状况并给出指导性的意见，使员工无法确定是否达到了要求&nbsp;&nbsp;&nbsp;&nbsp;
+    <hr/>
+
+    <span>11、	请您评价一下本公司的内部沟通现状？</span><br /><br />
+    <input type="checkbox" name="GouTong" value="A 直接上下级沟通渠道畅通">A 直接上下级沟通渠道畅通&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="GouTong" value="B 直接上下级沟通渠道不畅通">B 直接上下级沟通渠道不畅通&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="GouTong" value="C 部门之间信息交流渠道畅通">C 部门之间信息交流渠道畅通&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="checkbox" name="GouTong" value="D 部门之间信息交流渠道不畅通">D 部门之间信息交流渠道不畅通&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="GouTong" value="E 沟通方式以正式渠道为主">E 沟通方式以正式渠道为主&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="GouTong" value="F 沟通方式以非正式渠道为主">F 沟通方式以非正式渠道为主&nbsp;&nbsp;&nbsp;&nbsp;
+    <hr/>
+
+    <span>12、	您认为目前公司人力资源管理方面需改进的工作？</span><br /><br />
+    <input type="checkbox" name="RenLiGaiJin" value="A 科学合理进行岗位设置，制定岗位说明书">A 科学合理进行岗位设置，制定岗位说明书&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="RenLiGaiJin" value="B 进一步完善绩效考核方案，合理衡量各部门员工的岗位价值">B 进一步完善绩效考核方案，合理衡量各部门员工的岗位价值&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="checkbox" name="RenLiGaiJin" value="C 衔接各部门的工作接口，明确工作流程">C 衔接各部门的工作接口，明确工作流程&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="RenLiGaiJin" value="D 提高培训的力度，更新员工知识结构，增强员工工作技能">D 提高培训的力度，更新员工知识结构，增强员工工作技能&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="checkbox" name="RenLiGaiJin" value="E 建立后备人才培养机制，以满足公司快速发展的需要">E 建立后备人才培养机制，以满足公司快速发展的需要&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="RenLiGaiJin" value="F 进一步完善淘汰机制，能者上，庸者下">F 进一步完善淘汰机制，能者上，庸者下&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="checkbox" name="RenLiGaiJin" value="G 进一步完善晋升机制，增加员工晋升空间">G 进一步完善晋升机制，增加员工晋升空间&nbsp;&nbsp;&nbsp;&nbsp;
+    <hr/>
+
+    <span>13、	您认为目前公司培训存在哪些问题？</span><br /><br />
+    <input type="checkbox" name="PeiXunWenTi" value="A 认为整体效果还可以，没有问题">A 认为整体效果还可以，没有问题&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="PeiXunWenTi" value="B 培训内容有待改进">B 培训内容有待改进&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="PeiXunWenTi" value="C 培训实效有待改进 ">C 培训实效有待改进 &nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+    <input type="checkbox" name="PeiXunWenTi" value="D 培训安排有待改进">D 培训安排有待改进&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="PeiXunWenTi" value="E 培训讲师授课方式有待改进">E 培训讲师授课方式有待改进&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="PeiXunWenTi" value="F 培训考核方式有待改进">F 培训考核方式有待改进&nbsp;&nbsp;&nbsp;&nbsp;
+    <hr/>
+
+    <span>1、	您对公司精细化管理工作还有哪些建议，如何改进现有的操作流程？</span><br /><br />
+    <textarea name="JianYiA"></textarea>
+    <br /><br />
+
+    <span>2、	您对降低公司船舶营运、箱管等业务方面的成本支出有哪些建议？您认为公司管理方面还存在哪些不必要的成本支出，如何改善以达到尽善尽美？</span><br /><br />
+    <textarea name="JianYiB"></textarea>
+    <br /><br />
+
+    <span>3、	您对提升公司的服务质量有什么好的建议？</span><br /><br />
+    <textarea name="JianYiC"></textarea>
+    <br /><br />
+
+    <span>4、	您认为公司目前的风控管理还存在哪些问题？如何改善？</span><br /><br />
+    <textarea name="JianYiD"></textarea>
+    <br /><br />
+
+        <input type="submit" value="提交问卷" class="btn btn-lg btn-success"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value="清空选项" class="btn btn-lg btn-danger" />
+        <hr/>
+</form>

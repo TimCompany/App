@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Node.js</id>
+    <version>0.10.29</version>
+    <title>Node.js</title>
+    <authors>Joyent,Inc.</authors>
+    <owners>Pavel Nezhencev</owners>
+    <licenseUrl>https://raw.github.com/joyent/node/v0.10.29/LICENSE</licenseUrl>
+    <projectUrl>http://nodejs.org/</projectUrl>
+    <iconUrl>https://bitpay.com/img/js64.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications.
+
+Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.</description>
+    <releaseNotes>- openssl: to 1.0.1h (CVE-2014-0224)
+- npm: upgrade to 1.4.10
+- utf8: Prevent Node from sending invalid UTF-8 (Felix Geisendörfer)
+- child_process: do not set args before throwing (Greg Sabia Tucker)
+- child_process: spawn() does not throw TypeError (Greg Sabia Tucker)
+- constants: export O_NONBLOCK (Fedor Indutny)
+- crypto: improve memory usage (Alexis Campailla)
+- fs: close file if fstat() fails in readFile() (cjihrig)
+- lib: name EventEmitter prototype methods (Ben Noordhuis)
+- tls: fix performance issue (Alexis Campailla)</releaseNotes>
+    <copyright>© 2014 Joyent, Inc.</copyright>
+    <tags>nodejs exe javascript runtime server</tags>
+  </metadata>
+</package>

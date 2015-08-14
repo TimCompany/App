@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "TouPiaoResult";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    $(function () {
+
+        $("#ResultForm").validate({
+            rules: {
+                ResultCount: {
+                    digits: true,
+                    max:100,
+                    min:1
+                }
+            },
+            messages: {
+                ResultCount: {
+                    digits: "必须输入正整数",
+                    max: "最大值100",
+                    min: "最少值1"
+                }
+            }
+        });
+
+        if ($("#TongJiData").text() != "") {
+
+            //var tjdata = $("#TongJiList").text();
+
+            var tempArr = eval($("#TongJiData").text());
+
+            var myData = new Array();
+            for (var j = 0; j < tempArr.length; j++) {
+                myData.push([tempArr[j].name, tempArr[j].val]);
+            }
+
+            var jsChar = new JSChart('TouPiaoResult', 'bar');
+            jsChar.setDataArray(myData);
+            jsChar.setTitle("投票结果");
+            jsChar.setAxisNameX("系统名称");
+            jsChar.setAxisNameY("票数");
+            jsChar.resize(1200, 600);
+            jsChar.draw();
+        };
+    });
+
+</script>
+
+<div class="container">
+    <div class="text-center"><h2>公司新系统取名投票结果</h2></div>
+    <hr />
+    <form action="" method="post" name="ResultForm" id="ResultForm" class="col-lg-12">
+        <label for="UserName">显示前几名：</label>
+        <input type="text" name="ResultCount" id="ResultCount" />
+        <input type="radio" name="XingShi" value="BG" checked="checked">表格形式&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="radio" name="XingShi" value="TX">图形形式&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="submit" value="提交" />
+    </form><br />
+    <hr />
+
+    @if (ViewBag.XingShi == "TX")
+    {
+        <div id="TongJiData" class="hidden col-lg-12">@ViewBag.TongJiData</div>
+        <div id="TouPiaoResult">柱形投票结果</div>
+    }
+    else
+    {
+        <div class="container col-lg-12" id="biaoge">
+            <table class="table table-hover">
+                <tr>
+                    <th class="col-lg-2">序号</th>
+                    <th class="col-lg-2">票数</th>
+                    <th class="col-lg-2">中文名称</th>
+                    <th class="col-lg-6 text-left">英文名称</th>
+                </tr>
+                @{
+                    string[,] dgList = (string[,])ViewBag.BGData;
+                    for (int i = 0; i < dgList.GetLength(0); i++)
+                    {
+                        int xuhao=i+1;
+                        <tr>
+                            <td class="col-lg-2">
+                                @xuhao
+                            </td>
+                            <td class="col-lg-2">
+                                @dgList[i, 2]
+                            </td>
+                            <td class="col-lg-2">
+                                @dgList[i, 0]
+                            </td>
+                            <td class="col-lg-6 text-left">
+                                @dgList[i, 1]
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+    }
+    
+</div>
+
+
+
+

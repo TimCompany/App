@@ -1,0 +1,138 @@
+﻿@using MVC_WenJuan.Models;
+
+@model Dictionary<string, object>
+
+@{
+    ViewBag.Title = "投票跟踪";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    function CopyData(ids) {
+        $("#CopyID").removeClass("hidden");
+        $("#CopyID").text(ids);
+    }
+</script>
+<div class="container">
+    <form method="post" action="" id="checkSubmit" role="form" class="form-inline">
+        <div class="form-group">
+            <label for="CompanyName">所属组织</label>
+            <select name="CompanyName" id="CompanyName" class="form-control">
+                <option>ALL</option>
+                @{
+                    List<String> cnList = (List<string>)Model["CompanyNameList"];
+                    cnList.Sort();
+                    foreach (var cn in cnList)
+                    {
+                        if (cn == Request["CompanyName"])
+                        {
+                             <option selected="selected" value=@cn>@cn</option>
+                        }
+                        else
+                        {
+                            <option value=@cn>@cn</option>
+                        }
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="IsSubmit">是否已投票</label>
+            <select name="IsSubmit" id="IsSubmit" class="form-control">
+                @if (Request["IsSubmit"] == "ALL")
+                {
+                    <option selected="selected" value="ALL">ALL</option>
+                }
+                else
+                {
+                    <option value="ALL">ALL</option>
+                }
+                @if (Request["IsSubmit"] == "Y")
+                {
+                    <option selected="selected" value="Y">Y</option>
+                }
+                else
+                {
+                    <option value="Y">Y</option>
+                }
+                @if (Request["IsSubmit"] == "N")
+                {
+                    <option selected="selected" value="N">N</option>
+                }
+                else
+                {
+                    <option value="N">N</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="submit"  value="提交"/>
+        </div>
+    </form>
+    <div class="hidden" id="CopyID"></div>
+    <table class="table table-hover table-responsive">
+        <caption>用户投票跟踪</caption>
+        <tr class="text-left">
+            <th class="col-lg-1">序号</th>
+            <th class="col-lg-3">所属组织</th>
+            <th class="col-lg-2">姓名</th>
+            <th class="col-lg-3">联系方式</th>
+            <th class="col-lg-3">所投作品</th>
+        </tr>
+
+        @{
+            if (Model["UserList"] != null)
+            {
+                List<User> users = (List<User>)Model["UserList"];
+                List<TouPiao> toupiao = (List<TouPiao>)Model["TouPiaos"];
+            
+                int badgeCount = 1;
+                foreach (var item in users)
+                {
+                    var zName = string.Empty;
+                    var zToupiao = string.Empty;
+                    if (toupiao != null)
+                    {
+                        var zuopin = toupiao.Where(t => t.User.ID == item.ID).FirstOrDefault();
+                        if (zuopin != null)
+                        {
+                            zName = zuopin.SystemName.NameCN + "/" + zuopin.SystemName.NameEN;
+                            zToupiao = zuopin.ID.ToString();
+                        }
+                    }
+                    var ids = "USER_ID:" + item.ID + "-toupiao_id:" + zToupiao;
+               
+                    <tr class="text-center">
+                        <td class="col-lg-1" ondblclick="CopyData(' @ids')">
+                            @badgeCount<div class="hidden"></div>
+                        </td>
+                        <td class="col-lg-3">
+                            @item.Company
+                        </td>
+                        <td class="col-lg-2">
+                            @item.Name
+                        </td>
+                        <td class="col-lg-3">
+                            @item.Contact
+                        </td>
+                        @if (zName == string.Empty)
+                        {
+                            <td class="col-lg-3" style="background-color:red"></td>
+                        }
+                        else
+                        {
+                            <td class="col-lg-3">
+                                @zName
+                            </td>
+                        }
+                    </tr>
+
+                    badgeCount = badgeCount + 1;
+                }
+            }
+        }
+
+    </table>
+
+</div>
+

@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewBag.IsLoginOk == "NOT")
+{
+    <h2>请输入正确的账户信息</h2><br />
+}
+
+<form action="/WenJuan/Login" method="post">
+    <div class="form-group">
+        <label for="UserName">用户名：</label>
+        <input type="text" name="UserName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="PassWord">密  码：</label>
+        <input type="password" name="PassWord" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label class="hidden">submit</label>
+        <input type="submit" class="btn btn-success form-control" />
+    </div>
+</form>
+

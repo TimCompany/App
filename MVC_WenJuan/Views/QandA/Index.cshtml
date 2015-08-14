@@ -1,0 +1,271 @@
+﻿@using MVC_WenJuan.Models.QandA;
+
+@model Dictionary<string, object>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header>
+    <ul class="nav nav-pills">
+        @{
+            List<QuestionClass> classList = (List<QuestionClass>)Model["TabList"];
+            foreach (var c in classList)
+            {
+                if (ViewBag.TabID != string.Empty && Guid.Parse(ViewBag.TabID) == c.ID)
+                {
+                    <li class="active"><a href="?TabID=@c.ID">@c.ClassName</a></li>
+                }
+                else
+                {
+                    <li><a href="?TabID=@c.ID">@c.ClassName</a></li>
+                }
+            }
+        }
+    </ul>
+</header>
+
+<style>
+    textarea {
+        max-width: 1000px;
+        resize: none;
+    }
+</style>
+
+<script>
+    $(function () {
+        $("[data-toggle='popover']").popover();
+    });
+    function CreateQuestion() {
+        var postUrll = "/WenJuan/QandA/CreateQuestion";
+        $.post(postUrll, { QuestionClass: $("#myModalLabel").val(), QuestionSubject: $("#QuestionSubject").val(), UserName: $("#UserName").val(), UserContact: $("#UserContact").val(), QuestionBody: $("#QuestionBody").val() }, function (data, status) {
+            if (data == "QuestionOK") {
+                $("#QuestionSubject").val("");
+                $("#QuestionBody").val("");
+                alert("创建问题成功");
+                $("#tabID").val($("#myModalLabel").val());
+                window.location.href = "?TabID=" + $("#tabID").val();
+            }
+            else if (data == "False") {
+                alert("创建者姓名、问题正文为必填项。");
+            }
+            else {
+                alert("创建失败");
+            }
+        });
+    };
+    function AnswerQuestion(qid,questionSubject) {
+        $("#dbClickID").val(qid);
+        $("#answerQuestionSubject").text(questionSubject);
+        $("#answerModal").modal("toggle");
+    };
+    function AnswerQuestionSubmit() {
+        var postUrll = "/WenJuan/QandA/AnswerQuestion";
+        $.post(postUrll, { QuestionID: $("#dbClickID").val(), AnswerBody: $("#AnswerBody").val(), UserName: $("#UserNameAnswer").val(), UserContact: $("#UserContactAnswer").val() }, function (data, status) {
+            if (data == "AnswerOK") {
+                alert("回复问题成功");
+                $("#answerModal").modal("toggle");
+                location.reload();
+            }
+            else if (data == "False") {
+                alert("回复者姓名、回复正文为必填项。");
+            }
+            else {
+                alert(data);
+                alert("回复失败");
+            }
+        });
+    };
+</script>
+
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2 col-lg-offset-10">
+            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                创建问题
+            </button>
+        </div>
+    </div>
+</div>
+<br />
+
+<div class="container">
+    <table class="table table-hover">
+        <tr class="text-center">
+            <th class="col-lg-1">序号</th>
+            <th class="col-lg-3">主题</th>
+            <th class="col-lg-1">状态</th>
+            <th class="col-lg-1">回复</th>
+            <th class="col-lg-2">创建者</th>
+            <th class="col-lg-2">联系方式</th>
+            <th class="col-lg-2">创建时间</th>
+        </tr>
+        @{
+            if (Model["QuestionTable"] != null)
+            {
+                List<Qusetion> QusetionList = (List<Qusetion>)Model["QuestionTable"];
+                int qIndex = 1;
+
+                foreach (var q in QusetionList)
+                {
+                    string answerUserNames = string.Empty;
+                    q.Answers.OrderBy(qp => qp.SubmitTime);
+                    
+                    foreach (var an in q.Answers)
+                    {
+                        if (answerUserNames == string.Empty)
+                        {
+                            answerUserNames = an.SubmitUser.Name;
+                        }
+                        else
+                        {
+                            answerUserNames = answerUserNames + "<br/>" + an.SubmitUser.Name;
+                        }
+                    }
+                    
+                    <tr class="text-center" ondblclick="AnswerQuestion('@q.ID','@q.Subject')">
+                        <th class="col-lg-1">@qIndex</th>
+                        <th class="col-lg-3"><a href="#@q.ID">@q.Subject</a></th>
+                        <th class="col-lg-1">@q.State.Name</th>
+
+                        <th class="col-lg-1">
+                            <span class="badge"
+                                  title="最新回复"
+                                  data-container="body"
+                                  data-toggle="popover"
+                                  data-placement="right"
+                                  data-html="true"
+                                  data-content=@answerUserNames>
+                                @q.Answers.Count()
+                            </span>
+                        </th>
+
+                        <th class="col-lg-2">@q.SubmitUser.Name</th>
+                        <th class="col-lg-2">@q.SubmitUser.Contact</th>
+                        <th class="col-lg-2">@q.SubmitTime.ToLocalTime()</th>
+                    </tr>
+                    qIndex = qIndex + 1;
+                }
+            }
+        }
+    </table>
+    <span class="hidden" id="dbClickID"></span>
+    <span class="hidden" id="tabID">@ViewBag.TabID</span>
+</div>
+
+@{
+    if (Model["QuestionTable"] != null)
+    {
+        List<Qusetion> QusetionList = (List<Qusetion>)Model["QuestionTable"];
+
+        foreach (var q in QusetionList)
+        {
+             if (q.Answers.Count() != 0)
+            {
+                 <hr />
+            <div class="container" id="@q.ID">
+                <table class="table-bordered" title="@q.Subject" width="100%">
+                    <tr style="background-color:lightgrey">
+                        <td>
+                            <blockquote>
+                                <p>
+                                    <h4>@q.Subject</h4>
+                                    <h5>@q.Body</h5>
+                                </p>
+                            </blockquote>
+                            <blockquote class="pull-right">
+                                <small>问题状态：@q.State.Name   作者资料： @q.SubmitUser.Name  @q.SubmitUser.Contact @q.SubmitTime.ToLocalTime() <span class="badge">@q.Answers.Count()</span></small>
+                            </blockquote>
+                        </td>
+                    </tr>
+                    @{
+                 foreach (var an in q.Answers)
+                {
+                    <tr>
+                        <td>
+                            <blockquote>
+                                <p>
+                                    <h5>@an.Body</h5>
+                                </p>
+                            </blockquote>
+                            <blockquote class="pull-right">
+                                <small>回复者资料： @an.SubmitUser.Name  @an.SubmitUser.Contact @an.SubmitTime.ToLocalTime() <span class="badge">@an.SupportUsers.Count()</span></small>
+                            </blockquote>
+                        </td>
+                    </tr>
+                 }
+                    }
+                </table>
+            </div>
+             }
+        }
+    }
+}
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-lg center-block">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <select name="QuestionClass" class="modal-title" id="myModalLabel" style="height:100%;width:200px;border:thin">
+                    @{
+                        foreach (var c in classList)
+                        {
+                            if (c.ID == Guid.Parse(ViewBag.TabID))
+                            {
+                                <option selected="selected" value= @c.ID>@c.ClassName</option>
+                            }
+                            else
+                            {
+                                <option value=@c.ID>@c.ClassName</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="QuestionSubject">问题主题</label>
+                    <input type="text" name="QuestionSubject" id="QuestionSubject" placeholder="必输项" style="width:100%" />
+                </div>
+                <textarea name="QuestionBody" id="QuestionBody" placeholder=" 问题内容,必填" style="width:100%"></textarea>
+                <div class="form-inline">
+                    <label for="UserName">提交者：</label><input type="text" name="UserName" id="UserName"  placeholder="必输项" />
+                    <label for="UserContact">联系方式：</label><input type="text" name="UserContact" id="UserContact" placeholder="最好也填" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-lg btn-primary" onclick="CreateQuestion()">提交问题</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="answerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-lg center-block">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <span>回复：</span><span id="answerQuestionSubject"></span>
+            </div>
+            <div class="modal-body">
+                <textarea name="AnswerBody" id="AnswerBody" placeholder="回复内容,必填" style="width:100%"></textarea>
+                <div class="form-inline">
+                    <label for="UserNameAnswer">回复者：</label><input type="text" name="UserNameAnswer" id="UserNameAnswer" placeholder="必输项" />
+                    <label for="UserContactAnswer">联系方式：</label><input type="text" name="UserContactAnswer" id="UserContactAnswer" placeholder="最好也填" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-lg btn-primary" onclick="AnswerQuestionSubmit()">提交回复</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Npm</id>
+    <version>1.4.15.1</version>
+    <authors>Isaac Z. Schlueter</authors>
+    <owners>Pavel Nezhencev</owners>
+    <licenseUrl>https://raw.github.com/npm/npm/master/LICENSE</licenseUrl>
+    <projectUrl>https://www.npmjs.org/</projectUrl>
+    <iconUrl>https://raw.github.com/npm/npm/master/html/npm-64-square.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A package manager for node.js.</description>
+    <summary />
+    <releaseNotes>- added support for environments behind corporate proxy</releaseNotes>
+    <copyright>© 2014 Isaac Z. Schlueter and Contributors</copyright>
+    <tags>node js package manager</tags>
+    <dependencies>
+      <dependency id="Node.js" version="0.10.26.1" />
+      <dependency id="NoGit" version="0.0.7" />
+    </dependencies>
+  </metadata>
+</package>

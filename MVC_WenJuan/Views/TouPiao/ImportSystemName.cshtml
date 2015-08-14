@@ -1,0 +1,173 @@
+﻿
+@{
+    ViewBag.Title = "ImportSystemName";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body onkeydown="return keyDownHandler(event)">
+
+    <script>
+
+        function keyDownHandler(event) {
+            if (event.ctrlKey && event.keyCode == 86) {
+
+                var preData = $("#preData");
+                preData.removeClass("hidden");
+                preData.focus();
+                preData.select();
+                // 等50毫秒，keyPress事件发生了再去处理数据
+                setTimeout("dealwithData()", 50);
+            }
+        }
+
+        function handleData(guiHaoList) {
+
+            var trList = new Array();
+
+            for (var i = 0; i < guiHaoList.length; i++) {
+
+                if (guiHaoList[i].trim() != "") {
+
+                    var tr = document.createElement("tr");
+                    tr.setAttribute("class", "row text-center")
+
+                    var td0 = document.createElement("td");
+                    td0.setAttribute("class", "col-lg-1");
+
+                    var td1 = document.createElement("td");
+                    td1.setAttribute("class", "col-lg-1");
+
+                    var td2 = document.createElement("td");
+                    td2.setAttribute("class", "col-lg-1");
+
+                    var td3 = document.createElement("td");
+                    td3.setAttribute("class", "col-lg-7");
+
+                    var td4 = document.createElement("td");
+                    td4.setAttribute("class", "col-lg-2");
+
+                    tr.appendChild(td0);
+                    tr.appendChild(td1);
+                    tr.appendChild(td2);
+                    tr.appendChild(td3);
+                    tr.appendChild(td4);
+
+                    td0.innerHTML = i + 1;
+
+                    var tdList = guiHaoList[i].split("\t");
+                    if (tdList.length == 4) {
+                        td1.innerHTML = tdList[0];
+                        td2.innerHTML = tdList[1];
+                        td3.innerHTML = tdList[2];
+                        td4.innerHTML = tdList[3];
+                    }
+                    else {
+                        td1.innerHTML = "NULL";
+                        td2.innerHTML = "NULL";
+                        td3.innerHTML = "NULL";
+                        td4.innerHTML = "NULL";
+                    }
+
+                    trList.push(tr);
+
+                }
+
+            }
+
+            return trList;
+        }
+
+        function dealwithData(event) {
+            var preData = $("#preData");
+            preData.addClass("hidden");
+
+            var preHandleData = preData.val();
+
+            //var nameCN = "";
+            //var nameEN = "";
+            //var remark = "";
+            //var submitTime = "";
+
+            var trList = preHandleData.split("\n");
+            //for (var i = 0; i < trList.length; i++) {
+            //    if (trList[i].trim() != "") {
+
+            //        var rowstr = new String(trList[i].trim());
+
+            //        var tdList = rowstr.split("\t");
+            //        nameCN = tdList[0];
+            //        nameEN = tdList[1];
+            //        remark = tdList[2];
+            //        submitTime = tdList[3];
+
+            //    }
+            //}
+
+            if (trList.length > 0) {
+                var trList = handleData(trList);
+                $("#handledDataTable").append(trList);
+            }
+        }
+
+        function btnSubmit() {
+
+            var dataTable = document.getElementById("handledDataTable");
+
+            if (dataTable.rows.length > 1) {
+
+                var submitString = "";
+
+                for (var i = 1; i < dataTable.rows.length; i++) {
+
+                    var row = dataTable.rows[i];
+                    var cellstring = "";
+
+                    for (var j = 1; j < row.cells.length; j++) {
+
+                        if (cellstring != "") {
+                            cellstring = cellstring + "&" + row.cells[j].innerText;
+                        }
+                        else {
+                            cellstring = row.cells[j].innerText;
+                        }
+
+                    }
+
+                    if (submitString != "") {
+                        submitString = submitString + "%" + cellstring;
+                    }
+                    else {
+                        submitString = cellstring;
+                    }
+                }
+
+                var postUrll = "/WenJuan/TouPiao/ImportSystemName";//"/WenJuan/TouPiao/ImportSystemName";
+                $.post(postUrll, { exportDataList: submitString }, function (data, status) {
+                    $("#SubmitResult").text("导入成功,请验证");
+                    $("#SubmitResult").css("background-color", "greenyellow");
+                });
+            }
+            else {
+                $("#SubmitResult").text("请加入数据");
+                $("#SubmitResult").css("background-color", "greenyellow");
+            }
+        }
+
+    </script>
+
+
+    <div class="container-fluid">
+        <table class="table table-hover" id="handledDataTable">
+            <tr class="row">
+                <th class="col-lg-1 text-center">序号</th>
+                <th class="col-lg-1 text-center">中文名称</th>
+                <th class="col-lg-1 text-center">英文名称</th>
+                <th class="col-lg-7 text-center">作者备注</th>
+                <th class="col-lg-2 text-center">提交时间</th>
+            </tr>
+        </table>
+        <button class="btn-success" onclick="btnSubmit()">提交</button>
+        <label id="SubmitResult"></label>
+        <textarea class="hidden" id="preData" name="preData"></textarea>
+</div>
+
+</body>

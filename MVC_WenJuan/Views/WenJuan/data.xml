@@ -1,0 +1,19 @@
+﻿<?xml version="1.0"?>
+
+<JSChart>
+
+<dataset type="pie">
+
+<data unit="Unit_1" value="10"/>
+
+<data unit="Unit_2" value="90"/>
+
+<data unit="Unit_3" value="10"/>
+
+<data unit="Unit_4" value="20"/>
+
+<data unit="Unit_5" value="30"/>
+
+</dataset>
+
+</JSChart>

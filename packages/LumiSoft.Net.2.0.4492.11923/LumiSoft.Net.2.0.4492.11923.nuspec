@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>LumiSoft.Net</id>
+    <version>2.0.4492.11923</version>
+    <title>LumiSoft.Net</title>
+    <authors>Viacheslav.Manulik</authors>
+    <owners>Viacheslav.Manulik</owners>
+    <projectUrl>https://github.com/pruiz/LumiSoft.Net</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Version of LumiSoft.Net library with community fixes.</description>
+    <summary>Version of LumiSoft.Net library with community fixes.</summary>
+  </metadata>
+</package>

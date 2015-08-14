@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title--Web App Made By Tim</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery-validate")
+    @Scripts.Render("~/bundles/jscharts")
+
+    <style>
+        form label.error {
+            width: 200px;
+            margin-left: 10px;
+            color: Red;
+        }
+        body{
+            font-size:16px;
+            font:bolder
+        }
+        textarea{
+            height:200px;
+            width:800px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="container body-content" style="padding-top:0px">
+        @RenderBody()
+    </div>
+    
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,160 @@
+﻿@using MVC_WenJuan.Models;
+
+@model Dictionary<string,object>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    $(function () {
+        $("#TouPiaoForm").validate({
+            rules: {
+                CompanyName: {
+                    required: true
+                },
+                UserName: {
+                    required: true
+                },
+                checkID: {
+                    required: true
+                }
+            },
+            messages: {
+                CompanyName: {
+                    required: "请选择公司名称"
+                },
+                UserName: {
+                    required: "请选择员工名称"
+                },
+                checkID: {
+                    required: "请选择系统名称"
+                }
+            },
+            errorLabelContainer: $("#TouPiaoForm div.error")
+
+        });
+
+        $("#CompanyName").change(function () {
+
+            var checkText = $("#CompanyName").find("option:selected").text();
+
+            $("#UserName").empty();
+            $("#UserName").append("<option></option>");
+
+            //"/WenJuan/TouPiao/GetUserNames"
+            $.get("/WenJuan/TouPiao/GetUserNames", { CompanyName: checkText }, function (data) {
+
+                var tempArr = eval(data);
+                for (var j = 0; j < tempArr.length; j++) {
+                    $("#UserName").append("<option value='" + tempArr[j].name + "'>" + tempArr[j].name + "</option>");
+                }
+
+              });
+        });
+
+    });
+    
+</script>
+
+<div class="container">
+
+    <h2 class="text-center">公司新系统取名投票</h2></div>
+
+    <form action="" method="post" id="TouPiaoForm" role="form">
+        <div class="form-group">
+            <label for="CompanyName">公司名称：</label>
+            <select name="CompanyName" id="CompanyName" class="form-control">
+                <option></option>
+                @{
+                    IList<String> cnList = (IList<string>)Model["CompanyList"];
+                    foreach (var cn in cnList)
+                    {
+                        <option value=@cn>@cn</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="UserName">员工名称：</label>
+            <select name="UserName" id="UserName" class="form-control">
+                <option></option>
+                @{
+                    IList<String> unList = (IList<string>)Model["NameList"];
+                    foreach (var un in unList)
+                    {
+                        <option value=@un>@un</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="error">
+            <label style="font:bold;color:red" class="text-center">@ViewBag.FeebackMessage</label>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-default btn-lg">提交</button>
+            <button type="reset" class="btn btn-danger btn-lg" onclick="location.href = location.href;">重置</button>
+        </div>
+
+        <div class="form-group">
+            <span>投票须知：请选择对应的部门、用户名称后再选中相应的系统名称进行提交。<br />如发现投票操作不是自己操作的，请发邮件至CWT@CHUKONG.COM进行查核。</span>
+        </div>
+        
+        <div class="container">
+
+            <table class="table table-hover table-responsive">
+                <caption>候选名称列表</caption>
+                <tr class="text-left">
+                    <th class="col-lg-1">序号</th>
+                    <th class="col-lg-1">勾选投票</th>
+                    <th class="col-lg-2">中文名称</th>
+                    <th class="col-lg-2">英文名称</th>
+                    <th class="col-lg-6">作者备注</th>
+                </tr>
+
+                @{
+    IList<SystemName> snList = (IList<SystemName>)Model["SystemName"];
+    int badgeCount = 1;
+    foreach (var item in snList)
+    {
+        <tr class="text-left">
+            <td class="col-lg-1">
+                <label for=@item.ID>@badgeCount</label>
+            </td>
+            <td class="col-lg-1">
+                <input type="radio" name="checkID" id=@item.ID value=@item.ID style="width:20px;height:20px"/>
+            </td>
+            <td class="col-lg-2">
+                <label for=@item.ID>@item.NameCN</label>
+            </td>
+            <td class="col-lg-2">
+                <label for=@item.ID>@item.NameEN</label>
+            </td>
+            <td class="col-lg-6">
+                @if (item.Remark != string.Empty)
+                {
+                    <div>
+                        @{
+                    string[] markList = item.Remark.Split('$');
+                    foreach (string mark in markList)
+                    {
+                        <span>@mark</span><br />
+                    }
+                        }
+                    </div>
+                }
+            </td>
+        </tr>
+
+                badgeCount = badgeCount + 1;
+    }
+}
+
+            </table>
+        </div>
+    </form>
+</div>

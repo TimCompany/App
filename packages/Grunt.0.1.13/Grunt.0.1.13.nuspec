@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Grunt</id>
+    <version>0.1.13</version>
+    <authors>Grunt Team</authors>
+    <owners>Pavel Nezhencev</owners>
+    <licenseUrl>http://github.com/gruntjs/grunt-cli/blob/master/LICENSE-MIT</licenseUrl>
+    <projectUrl>http://gruntjs.com/</projectUrl>
+    <iconUrl>http://putaindecode.fr/media/gruntjs.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Grunt is the JavaScript task runner, which main purpose is to automate repetitive tasks like minification, compilation, unit testing, linting, etc.
+
+With literally thousands of plugins to choose from, you can use Grunt to automate just about anything with a minimum of effort.</description>
+    <summary>Command line interface for Grunt (The JavaScript Task Runner).</summary>
+    <releaseNotes>- If a --gruntfile is passed in with --base use basedir from gruntfile</releaseNotes>
+    <copyright>© 2014 Grunt Team</copyright>
+    <tags>javascript js task runner automation</tags>
+    <dependencies>
+      <dependency id="Node.js" version="0.10.26.1" />
+      <dependency id="Npm" version="1.4.4" />
+    </dependencies>
+  </metadata>
+</package>

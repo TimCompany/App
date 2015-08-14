@@ -1,0 +1,36 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>评卷模板上传</title>
+</head>
+<body>
+    <div> 
+        <form action="/WenJuan/SubmitWenJuanTemplate" method="post">
+            <label>模板数据</label>
+            @if (ViewBag.SubmitResult != string.Empty)
+            {
+                if (ViewBag.SubmitResult == "OK")
+                {
+                    <label>-------------提交成功</label>
+                }
+                else
+                {
+                    <label>--------------- @ViewBag.SubmitResult</label>
+                }
+            }
+            <br />
+            <textarea name="wjdata" style="height: 600px; width: 100%;"></textarea><br />
+            <input type="submit" value="提交" />
+        </form>
+    </div>
+</body>
+</html>

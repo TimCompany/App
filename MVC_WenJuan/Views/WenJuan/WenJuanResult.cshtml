@@ -1,0 +1,876 @@
+﻿@{
+    ViewBag.Title = "WenJuanResult";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string other = string.Empty;
+    string[] otherList;
+    
+    }
+
+<script>
+    $(function () {
+
+        if ($("#TongJiList").text() != "") {
+
+            var tongJiList = $("#TongJiList").text().split("$");
+
+            for (var i = 0; i < tongJiList.length; i++) {
+
+                var tempID = tongJiList[i];
+
+                if ($("#" + tempID).text() != "") {
+
+                    var dataList = $("#" + tempID).text().split('$');
+
+                    var tempArr = eval(dataList[0]);
+
+                    var myData = new Array();
+                    for (var j = 0; j < tempArr.length; j++) {
+                        myData.push([tempArr[j].name, tempArr[j].val]);
+                    }
+                    var YingXiang = new JSChart(tempID, 'pie');
+                    YingXiang.setDataArray(myData);
+                    YingXiang.setTitle(dataList[1]);
+                    YingXiang.draw();
+                }
+            }
+        }
+
+        $("[name='Zone']").click(function () {
+            if ($("[name='Zone']").val() != "") {
+                $("[name='BanShiChu']").prop("checked", false);
+            }
+        });
+
+        $("[name='BanShiChu']").click(function () {
+            if ($("[name='BanShiChu']").val() != "") {
+                $("[name='Zone']").prop("checked", false);
+            }
+        });
+
+    });
+
+    function ZoneSelectAll() {
+        $("[name='Zone']").prop("checked", true);
+        $("[name='BanShiChu']").prop("checked", false);
+    };
+    function ZoneUnSelectAll() {
+        $("[name='Zone']").prop("checked", false);
+    };
+
+    function BanShiChuSelectAll() {
+        $("[name='BanShiChu']").prop("checked", true);
+        $("[name='Zone']").prop("checked", false);
+    };
+    function BanShiChuUnSelectAll() {
+        $("[name='BanShiChu']").prop("checked", false);
+    };
+
+</script>
+
+<div id="option">
+    <form action="" method="post" name="ResultOption" id="ResultOption" style="border:groove;padding:70px;width:100%">
+        <span>@ViewBag.ErrorMsg</span>
+        <table class="table-bordered">
+            <tr>
+                <th class="text-center">区域选择</th>
+                <th class="text-center">办事处/分公司选择</th>
+            </tr>
+            <tr>
+                <td style="padding:20px">
+                    <input type="checkbox" name="Zone" value="'佛山区域'">佛山区域<br />
+                    <input type="checkbox" name="Zone" value="'北滘','容桂'">顺德区域（北滘、容桂）<br />
+                    <input type="checkbox" name="Zone" value="'江门','新会','台山','三埠','鹤山'">江门区域（江门、新会、台山、三埠、鹤山）<br />
+                    <input type="checkbox" name="Zone" value="'中山','中山小榄','中山黄圃'">中山区域（中山、中山榄、黄圃）<br />
+                    <input type="checkbox" name="Zone" value="'高明','九江'">高明区域（高明、九江）<br />
+                    <input type="checkbox" name="Zone" value="'肇庆三榕','肇庆高要','肇庆四会','肇庆新港','云浮','梧州'">肇庆区域（三榕、高要、四会、肇庆新港、云浮、梧州）<br />
+                    <input type="checkbox" name="Zone" value="'三水'">三水区域<br />
+                    <input type="checkbox" name="Zone" value="'莲花山','南沙','花都','清远'">南沙区域（莲花山、南沙、花都、清远）<br />
+                    <input type="checkbox" name="Zone" value="'斗门','西域'">珠海区域（斗门、西域）<br />
+                    <input type="checkbox" name="Zone" value="'广州散货部'">广州散货部<br />
+                    <input type="checkbox" name="Zone" value="'广州业务部'">广州业务部<br />
+                    <input type="checkbox" name="Zone" value="'广州空运部'">广州空运部<br />
+                    <input type="checkbox" name="Zone" value="'广州经营管理部'">广州经营管理部<br />
+                    <input type="checkbox" name="Zone" value="'广州财务部'">广州财务部<br />
+                    <input type="checkbox" name="Zone" value="'广州人力资源部'">广州人力资源部<br />
+                    <input type="checkbox" name="Zone" value="'广州行政部'">广州行政部<br />
+                    <input type="checkbox" name="Zone" value="'总经理室'">总经理室<br />
+                    <input type="button" class="btn btn-success" onclick="ZoneSelectAll()" value="全选" />
+                    <input type="button" class="btn btn-danger" onclick="ZoneUnSelectAll()" value="清空" />
+                </td>
+                <td style="padding:20px">
+                    <table>
+                        <tr>
+                            <td style="padding:20px">
+                                <input type="checkbox" name="BanShiChu" value="'佛山区域'">佛山区域<br />
+                                <input type="checkbox" name="BanShiChu" value="'北滘'">北滘<br />
+                                <input type="checkbox" name="BanShiChu" value="'容桂'">容桂<br />
+                                <input type="checkbox" name="BanShiChu" value="'江门'">江门<br />
+                                <input type="checkbox" name="BanShiChu" value="'新会'">新会<br />
+                                <input type="checkbox" name="BanShiChu" value="'台山'">台山<br />
+                                <input type="checkbox" name="BanShiChu" value="'三埠'">三埠<br />
+                                <input type="checkbox" name="BanShiChu" value="'鹤山'">鹤山<br />
+                                <input type="checkbox" name="BanShiChu" value="'中山'">中山<br />
+                                <input type="checkbox" name="BanShiChu" value="'中山小榄'">中山小榄<br />
+                                <input type="checkbox" name="BanShiChu" value="'中山黄圃'">中山黄圃<br />
+                                <input type="checkbox" name="BanShiChu" value="'高明'">高明<br />
+                                <input type="checkbox" name="BanShiChu" value="'九江'">九江<br />
+                                <input type="checkbox" name="BanShiChu" value="'肇庆三榕'">肇庆三榕<br />
+                                <input type="checkbox" name="BanShiChu" value="'肇庆高要'">肇庆高要<br />
+                                <input type="checkbox" name="BanShiChu" value="'肇庆四会'">肇庆四会<br />
+                                <input type="checkbox" name="BanShiChu" value="'肇庆新港'">肇庆新港<br />
+                                <input type="checkbox" name="BanShiChu" value="'云浮'">云浮<br />
+                            </td>
+                            <td style="padding:20px">
+                                <input type="checkbox" name="BanShiChu" value="'梧州'">梧州<br />
+                                <input type="checkbox" name="BanShiChu" value="'三水'">三水<br />
+                                <input type="checkbox" name="BanShiChu" value="'莲花山'">莲花山<br />
+                                <input type="checkbox" name="BanShiChu" value="'南沙'">南沙<br />
+                                <input type="checkbox" name="BanShiChu" value="'花都'">花都<br />
+                                <input type="checkbox" name="BanShiChu" value="'清远'">清远<br />
+                                <input type="checkbox" name="BanShiChu" value="'斗门'">斗门<br />
+                                <input type="checkbox" name="BanShiChu" value="'西域'">西域<br />
+                                <input type="checkbox" name="BanShiChu" value="'广州散货部'">广州散货部<br />
+                                <input type="checkbox" name="BanShiChu" value="'广州业务部'">广州业务部<br />
+                                <input type="checkbox" name="BanShiChu" value="'广州空运部'">广州空运部<br />
+                                <input type="checkbox" name="BanShiChu" value="'广州财务部'">广州财务部<br />
+                                <input type="checkbox" name="BanShiChu" value="'经营管理部'">经营管理部<br />
+                                <input type="checkbox" name="BanShiChu" value="'行政部'">行政部<br />
+                                <input type="checkbox" name="BanShiChu" value="'人力资源部'">人力资源部<br />
+                                <input type="checkbox" name="BanShiChu" value="'总经理室'">总经理室<br />
+                                <input type="button" class="btn btn-success" onclick="BanShiChuSelectAll()" value="全选" />
+                                <input type="button" class="btn btn-danger" onclick="BanShiChuUnSelectAll()" value="清空" />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="提交统计条件" class="btn-primary" />
+    </form>
+    <span class="hidden" id="TongJiList">@ViewBag.TongJiList</span>
+</div>
+
+    <h4>一、单项选择题</h4>
+    <hr style="border:double" />
+
+    <span>1、	您认为您所属办事处进行精细化管理，会给您带来什么影响？</span><br /><br />
+    <table class="table-bordered text-left">
+        <tr>
+            <th class="text-center">图例</th>
+            <th class="text-center">统计结果</th>
+            <th class="text-center">其他</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>A 增加了工作量</li>
+                    <li>B 减轻了工作量</li>
+                    <li>C 没有任何帮助</li>
+                    <li>D 说不清楚</li>
+                    <li>E 其他</li>
+                </ul>
+            </td>
+            <td>
+                <div id="YingXiang"><span class="hidden">@ViewBag.TongJiData["YingXiang"]</span></div>
+            </td>
+            <td>
+                @{
+                    other = ViewBag.TongJiData["YingXiang_Other"];
+                    otherList = other.Split('&');
+
+                    if (!string.IsNullOrEmpty(otherList[0]))
+                    {
+                        string[] dList = otherList[0].Split('$');
+                        <h5 style="color:blue">@otherList[1]</h5>
+                        <ol>
+                            @{
+                        foreach (string d in dList)
+                        {
+                                    <li>@d</li>
+                        }
+                            }
+                        </ol>
+                    }
+                }
+            </td>
+        </tr>
+    </table>
+    <hr style="border:double" />
+    
+    <span>2、	您认为哪些手段可以进一步促进中层管理者、基层员工进一步树立精细化管理观念和意识？</span><br /><br />
+    <table class="table-bordered text-left">
+        <tr>
+            <th class="text-center">图例</th>
+            <th class="text-center">统计结果</th>
+            <th class="text-center">其他</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>A 选择一些好的辅导材料，自主学习</li>
+                    <li>B 所属办事处负责人组织基层员工一起学习</li>
+                    <li>C 公司组织大型培训</li>
+                    <li>D 其他</li>
+                </ul>
+            </td>
+            <td>
+                <div id="YiShiGuanNian"><span class="hidden">@ViewBag.TongJiData["YiShiGuanNian"]</span></div>
+            </td>
+            <td>
+                @{
+                    other = ViewBag.TongJiData["YiShiGuanNian_Other"];
+                    otherList = other.Split('&');
+
+                    if (!string.IsNullOrEmpty(otherList[0]))
+                    {
+                        string[] dList = otherList[0].Split('$');
+                        <h5 style="color:blue">@otherList[1]</h5>
+                        <ol>
+                            @{
+                        foreach (string d in dList)
+                        {
+                                    <li>@d</li>
+                        }
+                            }
+                        </ol>
+                    }
+                }
+            </td>
+        </tr>
+    </table>
+    <hr style="border:double" />
+
+    <span>3、	您认为公司实施精细化管理的重点是？</span><br /><br />
+    <table class="table-bordered text-left">
+        <tr>
+            <th class="text-center">图例</th>
+            <th class="text-center">统计结果</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>A 市场营销</li>
+                    <li>B 财务成本</li>
+                    <li>C 信息技术</li>
+                    <li>D 人力资源</li>
+                    <li>E 企业文化</li>
+                </ul>
+            </td>
+            <td>
+                <div id="ZhongDian"><span class="hidden">@ViewBag.TongJiData["ZhongDian"]</span></div>
+            </td>
+        </tr>
+    </table>
+    <hr style="border:double" />
+
+    <span>4、	您认为您所属办事处是否建立岗位的工作流程？</span><br /><br />
+    <table class="table-bordered text-left">
+        <tr>
+            <th class="text-center">图例</th>
+            <th class="text-center">统计结果</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>A 是的，有详细的操作流程</li>
+                    <li>B 是的，有操作流程但不完整</li>
+                    <li>C 没有，都是靠传帮带</li>
+                    <li>D 没有，很难制定工作流程</li>
+                </ul>
+            </td>
+            <td>
+                <div id="LiuCheng"><span class="hidden">@ViewBag.TongJiData["LiuCheng"]</span></div>
+            </td>
+        </tr>
+    </table>
+    <hr style="border:double" />
+
+    <span>5、	您能够及时了解到本公司及办事处的相关工作信息吗？</span><br /><br />
+    <table class="table-bordered text-left">
+        <tr>
+            <th class="text-center">图例</th>
+            <th class="text-center">统计结果</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>A 经常能</li>
+                    <li>B 偶尔能</li>
+                    <li>C 经常不能</li>
+                    <li>D 基本不能</li>
+                </ul>
+            </td>
+            <td>
+                <div id="XinXi"><span class="hidden">@ViewBag.TongJiData["XinXi"]</span></div>
+            </td>
+        </tr>
+    </table>
+    <hr style="border:double" />
+
+    <span>6、	您以为您所属单位人员的工作量饱和吗？</span><br /><br />
+    <table class="table-bordered text-left">
+        <tr>
+            <th class="text-center">图例</th>
+            <th class="text-center">统计结果</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>A 较饱和</li>
+                    <li>B 不饱和</li>
+                    <li>C 忙闲不均</li>
+                </ul>
+            </td>
+            <td>
+                <div id="BaoHe"><span class="hidden">@ViewBag.TongJiData["BaoHe"]</span></div>
+            </td>
+        </tr>
+    </table>
+    <hr style="border:double" />
+
+    <span>7、	您认为您所属单位是否已经制定了清晰的人员培养和发展措施？其执行效果如何？</span><br /><br />
+    <table class="table-bordered text-left">
+        <tr>
+            <th class="text-center">图例</th>
+            <th class="text-center">统计结果</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>A 已经制定，执行效果很好</li>
+                    <li>B 已经制定，但是没见到执行效果</li>
+                    <li>C 已经制定，但是看起来不可行</li>
+                    <li>D 没有制定</li>
+                    <li>E 不太了解</li>
+                </ul>
+            </td>
+            <td>
+                <div id="PeiYang"><span class="hidden">@ViewBag.TongJiData["PeiYang"]</span></div>
+            </td>
+        </tr>
+    </table>
+    <hr style="border:double" />
+
+    <span>8、	您认为通过以下哪个方法提升部门收入最有效？</span><br /><br />
+    <table class="table-bordered text-left">
+        <tr>
+            <th class="text-center">图例</th>
+            <th class="text-center">统计结果</th>
+            <th class="text-center">其他</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>A 增加营销量</li>
+                    <li>B 挖掘老客户潜力</li>
+                    <li>C 老客户介绍</li>
+                    <li>D 挖掘同行客户</li>
+                    <li>E 其他</li>
+                </ul>
+            </td>
+            <td>
+                <div id="TiSheng"><span class="hidden">@ViewBag.TongJiData["TiSheng"]</span></div>
+            </td>
+            <td>
+                @{
+                    other = ViewBag.TongJiData["TiSheng_Other"];
+                    otherList = other.Split('&');
+
+                    if (!string.IsNullOrEmpty(otherList[0]))
+                    {
+                        string[] dList = otherList[0].Split('$');
+                        <h5 style="color:blue">@otherList[1]</h5>
+                        <ol>
+                            @{
+                        foreach (string d in dList)
+                        {
+                                    <li>@d</li>
+                        }
+                            }
+                        </ol>
+                    }
+                }
+            </td>
+        </tr>
+    </table>
+    <hr style="border:double" />
+
+    <span>9、	您认为您所属单位岗位设置存在的主要问题表现在哪里？</span><br /><br />
+    <table class="table-bordered text-left">
+        <tr>
+            <th class="text-center">图例</th>
+            <th class="text-center">统计结果</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>A 因人设置现象严重</li>
+                    <li>B 岗位职责划分不合理</li>
+                    <li>C 上岗条件不明确</li>
+                    <li>D 岗位职责与绩效工资不匹配</li>
+                </ul>
+            </td>
+            <td>
+                <div id="GangWeiWenTi"><span class="hidden">@ViewBag.TongJiData["GangWeiWenTi"]</span></div>
+            </td>
+        </tr>
+    </table>
+    <hr style="border:double" />
+
+    <span>10、	您认为您所属办事处实施新绩效奖金分配方案如何？</span><br /><br />
+    <table class="table-bordered text-left">
+        <tr>
+            <th class="text-center">图例</th>
+            <th class="text-center">统计结果</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>A 调动了大部分人的积极性</li>
+                    <li>B 调动了少部分人的积极性</li>
+                    <li>C 根本没有调动人的积极性</li>
+                </ul>
+            </td>
+            <td>
+                <div id="FenPeiFnagAn"><span class="hidden">@ViewBag.TongJiData["FenPeiFnagAn"]</span></div>
+            </td>
+        </tr>
+    </table>
+    <hr style="border:double" />
+
+    <span>11、	您认为您所属单位哪些方面可节约成本而不影响生产经营？</span><br /><br />
+    <table class="table-bordered text-left">
+        <tr>
+            <th class="text-center">图例</th>
+            <th class="text-center">统计结果</th>
+            <th class="text-center">其他</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>A 办公室水电费</li>
+                    <li>B 办公室、宿舍租金</li>
+                    <li>C 办公用品费</li>
+                    <li>D 办公饮用水</li>
+                    <li>E 其他</li>
+                </ul>
+            </td>
+            <td>
+                <div id="JieYue"><span class="hidden">@ViewBag.TongJiData["JieYue"]</span></div>
+            </td>
+            <td>
+                @{
+                    other = ViewBag.TongJiData["JieYue_Other"];
+                    otherList = other.Split('&');
+
+                    if (!string.IsNullOrEmpty(otherList[0]))
+                    {
+                        string[] dList = otherList[0].Split('$');
+                        <h5 style="color:blue">@otherList[1]</h5>
+                        <ol>
+                            @{
+                        foreach (string d in dList)
+                        {
+                                    <li>@d</li>
+                        }
+                            }
+                        </ol>
+                    }
+                }
+            </td>
+        </tr>
+    </table>
+    <hr style="border:double" />
+
+    <h4>二、不定项选择题（可单项选择或多项选择）</h4>
+    <hr />
+
+    <span>1、	您认为所属单位对精细化管理的需求最迫切是？</span><br /><br />
+    <table class="table-bordered text-left">
+        <tr>
+            <th class="text-center">图例</th>
+            <th class="text-center">统计结果</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>A 营销</li>
+                    <li>B 客服</li>
+                    <li>C 操作</li>
+                    <li>D 箱管</li>
+                    <li>E 财务</li>
+                </ul>
+            </td>
+            <td>
+                <div id="XuQiu"><span class="hidden">@ViewBag.TongJiData["XuQiu"]</span></div>
+            </td>
+        </tr>
+    </table>
+    <hr style="border:double" />
+
+    <span>2、	如果流程不畅通，可能的原因包括哪些？</span><br /><br />
+    <table class="table-bordered text-left">
+        <tr>
+            <th class="text-center">图例</th>
+            <th class="text-center">统计结果</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>A 办事处各部门之间职责不清</li>
+                    <li>B 缺乏对流程运行的监督、检查</li>
+                    <li>C 公司的流程无书面化或无用信息化手段固化</li>
+                    <li>D 部门分割严重，协调难度大</li>
+                    <li>E 部门之间推卸责任，本位主义严重</li>
+                </ul>
+            </td>
+            <td>
+                <div id="BuTongChang"><span class="hidden">@ViewBag.TongJiData["BuTongChang"]</span></div>
+            </td>
+        </tr>
+    </table>
+    <hr style="border:double" />
+
+    <span>3、	您觉得您所属单位对您的工作岗位职责设计清晰合理吗？</span><br /><br />
+    <table class="table-bordered text-left">
+        <tr>
+            <th class="text-center">图例</th>
+            <th class="text-center">统计结果</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>A 分工不清晰，分公司业务量较小，员工通常身兼多个岗位</li>
+                    <li>B 分工不清晰，分公司业务量大，人手不充足</li>
+                    <li>C 分工不清晰，岗位职责不够严谨，不同岗位之间的责任没有划清，导致流程容易模糊</li>
+                    <li>D 分工清晰，但导致人员编制较多</li>
+                    <li>E 分工清晰，人员编制合理</li>
+                </ul>
+            </td>
+            <td>
+                <div id="GangWeiHeLi"><span class="hidden">@ViewBag.TongJiData["GangWeiHeLi"]</span></div>
+            </td>
+        </tr>
+    </table>
+    <hr style="border:double" />
+
+    <span>4、	您对新业务系统的岗位调整、流程优化有哪些建议？</span><br /><br />
+    <table class="table-bordered text-left">
+        <tr>
+            <th class="text-center">图例</th>
+            <th class="text-center">统计结果</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>A 国内、香港都设定一个责任人负责每一条航线，由责任人监督和指导新系统工作</li>
+                    <li>B 新业务系统优化过程中，有新的功能或者新的变化出现，应由香港信息部及时通知所有业务部门</li>
+                    <li>C 在新系统与飞龙两套系统并行过程中，将工作任务较重的内容分摊,并在绩效分配时做适当调整</li>
+                    <li>D 定期做新系统经验交流，将遇到的问题和解决办法进行共享</li>
+                </ul>
+            </td>
+            <td>
+                <div id="LiuChengJianYi"><span class="hidden">@ViewBag.TongJiData["LiuChengJianYi"]</span></div>
+            </td>
+        </tr>
+    </table>
+    <hr style="border:double" />
+
+    <span>5、	您认为目前公司客服人员在哪方面表现特别不当？</span><br /><br />
+    <table class="table-bordered text-left">
+        <tr>
+            <th class="text-center">图例</th>
+            <th class="text-center">统计结果</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>A 不耐心</li>
+                    <li>B 不热忱</li>
+                    <li>C 不专心听取</li>
+                    <li>D 不友善</li>
+                    <li>E 反应迟钝</li>
+                    <li>F 没有不当之处</li>
+                </ul>
+            </td>
+            <td>
+                <div id="KeFuQueDian"><span class="hidden">@ViewBag.TongJiData["KeFuQueDian"]</span></div>
+            </td>
+        </tr>
+    </table>
+    <hr style="border:double" />
+
+    <span>6、	在以下箱管操作中，您认为所在办事处需在哪些方面加强精细化管理，以提高服务质量，减少失误和降低成本？</span><br /><br />
+    <table class="table-bordered text-left">
+        <tr>
+            <th class="text-center">图例</th>
+            <th class="text-center">统计结果</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>A 船公司EDI</li>
+                    <li>B 货柜适装检验</li>
+                    <li>C 货柜清洁和维修</li>
+                    <li>D 船公司吉柜控制和使用</li>
+                    <li>E 珠江柜调控</li>
+                </ul>
+            </td>
+            <td>
+                <div id="JiangBen"><span class="hidden">@ViewBag.TongJiData["JiangBen"]</span></div>
+            </td>
+        </tr>
+    </table>
+    <hr style="border:double" />
+
+    <span>7、	对营销人员考核的精细化管理中，除毛利外，以下哪些方面您认为是必要的，或需加强的？</span><br /><br />
+    <table class="table-bordered text-left">
+        <tr>
+            <th class="text-center">图例</th>
+            <th class="text-center">统计结果</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>A 拜访客户次数或频率</li>
+                    <li>B 对客户生活和工作等方面关怀的次数</li>
+                    <li>C 对目标客户持续跟踪和沟通的次数</li>
+                    <li>D 对客户跟踪情况的文字总结归档</li>
+                    <li>E 新客户的数量</li>
+                    <li>F 旧客户的新业务开拓</li>
+                </ul>
+            </td>
+            <td>
+                <div id="JiaQiang"><span class="hidden">@ViewBag.TongJiData["JiaQiang"]</span></div>
+            </td>
+        </tr>
+    </table>
+    <hr style="border:double" />
+
+    <span>8、	在您所属单位客服人员考核的精细化管理中，您认为以下哪些方面是必要的，或需加强的？</span><br /><br />
+    <table class="table-bordered text-left">
+        <tr>
+            <th class="text-center">图例</th>
+            <th class="text-center">统计结果</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>A 为客户解决重大问题的次数并总结方案</li>
+                    <li>B 文字归档总结客户出现的问题和解决方案</li>
+                    <li>C 回复客户邮件信息的速度</li>
+                    <li>D 接听电话的速度</li>
+                    <li>E 反馈客户信息给营销人员或负责人的频率</li>
+                    <li>F 对新旧客户积极推销我司业务的频率和次数</li>
+                </ul>
+            </td>
+            <td>
+                <div id="KaoHe"><span class="hidden">@ViewBag.TongJiData["KaoHe"]</span></div>
+            </td>
+        </tr>
+    </table>
+    <hr style="border:double" />
+
+    <span>9、	如果您觉得目前公司的人员培养不合理，您认为是哪方面不合理？</span><br /><br />
+    <table class="table-bordered text-left">
+        <tr>
+            <th class="text-center">图例</th>
+            <th class="text-center">统计结果</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>A 选拔的培养对象不对</li>
+                    <li>B 没有进行培养对象选拔</li>
+                    <li>C 高层领导没有足够重视</li>
+                    <li>D 缺乏培养对象的淘汰制度</li>
+                </ul>
+            </td>
+            <td>
+                <div id="PeiYangBuHeLi"><span class="hidden">@ViewBag.TongJiData["PeiYangBuHeLi"]</span></div>
+            </td>
+        </tr>
+    </table>
+    <hr style="border:double" />
+
+    <span>10、	您以为您所属办事处绩效考核中存在哪些重要问题需要改进？</span><br /><br />
+    <table class="table-bordered text-left">
+        <tr>
+            <th class="text-center">图例</th>
+            <th class="text-center">统计结果</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>A 考核指标设置不合理，部分考核指标过于模糊化，难以衡量</li>
+                    <li>B 几乎没有考核</li>
+                    <li>C 考核只流于形式，员工考核的分数都差不多（或者部门内轮流坐庄），其目的就是为了分配绩效奖金</li>
+                    <li>D 考核结果没有与员工的绩效改进、升职加薪联系起来，为了考核而考核</li>
+                    <li>E 办事处负责人给员工的绩效反馈和沟通不足，使员工无法确定需要在哪些方面进行改进</li>
+                    <li>F 办事处负责人缺乏有效的绩效反馈和指导技能，不能有效地提供如何改进的信息</li>
+                    <li>G 办事处负责人不能持续跟踪员工的业绩改进状况并给出指导性的意见，使员工无法确定是否达到了要求</li>
+                </ul>
+            </td>
+            <td>
+                <div id="KaoHeGaiJin"><span class="hidden">@ViewBag.TongJiData["KaoHeGaiJin"]</span></div>
+            </td>
+        </tr>
+    </table>
+    <hr style="border:double" />
+
+    <span>11、	请您评价一下本公司的内部沟通现状？</span><br /><br />
+    <table class="table-bordered text-left">
+        <tr>
+            <th class="text-center">图例</th>
+            <th class="text-center">统计结果</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>A 直接上下级沟通渠道畅通</li>
+                    <li>B 直接上下级沟通渠道不畅通</li>
+                    <li>C 部门之间信息交流渠道畅通</li>
+                    <li>D 部门之间信息交流渠道不畅通</li>
+                    <li>E 沟通方式以正式渠道为主</li>
+                    <li>F 沟通方式以非正式渠道为主</li>
+                </ul>
+            </td>
+            <td>
+                <div id="GouTong"><span class="hidden">@ViewBag.TongJiData["GouTong"]</span></div>
+            </td>
+        </tr>
+    </table>
+    <hr style="border:double" />
+
+    <span>12、	您认为目前公司人力资源管理方面需改进的工作？</span><br /><br />
+    <table class="table-bordered text-left">
+        <tr>
+            <th class="text-center">图例</th>
+            <th class="text-center">统计结果</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>A 科学合理进行岗位设置，制定岗位说明书</li>
+                    <li>B 进一步完善绩效考核方案，合理衡量各部门员工的岗位价值</li>
+                    <li>C 衔接各部门的工作接口，明确工作流程</li>
+                    <li>D 提高培训的力度，更新员工知识结构，增强员工工作技能</li>
+                    <li>E 建立后备人才培养机制，以满足公司快速发展的需要</li>
+                    <li>F 进一步完善淘汰机制，能者上，庸者下</li>
+                    <li>G 进一步完善晋升机制，增加员工晋升空间</li>
+                </ul>
+            </td>
+            <td>
+                <div id="RenLiGaiJin"><span class="hidden">@ViewBag.TongJiData["RenLiGaiJin"]</span></div>
+            </td>
+        </tr>
+    </table>
+    <hr style="border:double" />
+
+    <span>13、	您认为目前公司培训存在哪些问题？</span><br /><br />
+    <table class="table-bordered text-left">
+        <tr>
+            <th class="text-center">图例</th>
+            <th class="text-center">统计结果</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>A 认为整体效果还可以，没有问题</li>
+                    <li>B 培训内容有待改进</li>
+                    <li>C 培训实效有待改进</li>
+                    <li>D 培训安排有待改进</li>
+                    <li>E 培训讲师授课方式有待改进</li>
+                    <li>F 培训考核方式有待改进</li>
+                </ul>
+            </td>
+            <td>
+                <div id="PeiXunWenTi"><span class="hidden">@ViewBag.TongJiData["PeiXunWenTi"]</span></div>
+            </td>
+        </tr>
+    </table>
+    <hr style="border:double" />
+
+    <span>1、	您对公司精细化管理工作还有哪些建议，如何改进现有的操作流程？</span><br /><br />
+    @{
+        other = ViewBag.TongJiData["JianYiA"];
+        otherList = other.Split('&');
+
+        if (!string.IsNullOrEmpty(otherList[0]))
+        {
+            string[] dList = otherList[0].Split('$');
+            <h5 style="color:blue">@otherList[1]</h5>
+            <ol>
+                @{
+            foreach (string d in dList)
+            {
+                        <li>@d</li>
+            }
+                }
+            </ol>
+        }
+    }
+    <br /><br />
+
+    <span>2、	您对降低公司船舶营运、箱管等业务方面的成本支出有哪些建议？您认为公司管理方面还存在哪些不必要的成本支出，如何改善以达到尽善尽美？</span><br /><br />
+    @{
+        other = ViewBag.TongJiData["JianYiB"];
+        otherList = other.Split('&');
+
+        if (!string.IsNullOrEmpty(otherList[0]))
+        {
+            string[] dList = otherList[0].Split('$');
+            <h5 style="color:blue">@otherList[1]</h5>
+            <ol>
+                @{
+            foreach (string d in dList)
+            {
+                        <li>@d</li>
+            }
+                }
+            </ol>
+        }
+    }
+    <br /><br />
+
+    <span>3、	您对提升公司的服务质量有什么好的建议？</span><br /><br />
+    @{
+        other = ViewBag.TongJiData["JianYiC"];
+        otherList = other.Split('&');
+
+        if (!string.IsNullOrEmpty(otherList[0]))
+        {
+            string[] dList = otherList[0].Split('$');
+            <h5 style="color:blue">@otherList[1]</h5>
+            <ol>
+                @{
+            foreach (string d in dList)
+            {
+                        <li>@d</li>
+            }
+                }
+            </ol>
+        }
+    }
+    <br /><br />
+
+    <span>4、	您认为公司目前的风控管理还存在哪些问题？如何改善？</span><br /><br />
+    @{
+        other = ViewBag.TongJiData["JianYiD"];
+       otherList = other.Split('&');
+
+        if (!string.IsNullOrEmpty(otherList[0]))
+        {
+            string[] dList = otherList[0].Split('$');
+            <h5 style="color:blue">@otherList[1]</h5>
+            <ol>
+                @{
+            foreach (string d in dList)
+            {
+                        <li>@d</li>
+            }
+                }
+            </ol>
+        }
+    }
